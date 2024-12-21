@@ -1,4 +1,5 @@
 import React from 'react'
+import { AppBar, Container,Box, Typography, Button } from '@mui/material';
 
 const Navbar = () => {
     return (
@@ -14,6 +15,9 @@ const Navbar = () => {
                                 <a href="#" className="text-black px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-300">Home</a>
                                 <a href="#" className="textblack  px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-300">About</a>
                                 <a href="#" className="text-black px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-300">Contact</a>
+                                <Button href='/signup' color="inherit" sx={{ marginLeft: 'auto' }}>
+            Login
+          </Button>
                             </div>
                         </div>
                     </div>

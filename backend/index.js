@@ -5,6 +5,7 @@ const PORT = 3000;
 const cors = require("cors");
 const app = express();
 
+app.use(require('cors'))
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {

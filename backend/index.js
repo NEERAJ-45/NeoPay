@@ -1,19 +1,39 @@
 const express = require("express");
-const userRoute = require("./routes/user.routes");
-require("./config/mongodb.connection");
-const PORT = 3000;
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const mainRouter = require("./routes/index");
 const cors = require("cors");
-const app = express();
 
-app.use(require('cors'))
-app.use(express.urlencoded({ extended: true }));
+const app = express();
+dotenv.config();
+
+app.use(express.json());
+app.use(cors());
+
+app.use("/api/v1", mainRouter);
+
+// /api/v1/user/signup
+// /api/v1/user/signin
+// /api/v1/user/changePassword.....
+
+// /api/v1/account/transferMoney
+// /api/v1/account/balance
+
+//database
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL);
+    console.log("database is connected successfully!");
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+  res.json("Server is up and running");
 });
 
-app.use("/user", userRoute);
-
-app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost:${PORT}`);
+app.listen(process.env.PORT, () => {
+  connectDB();
+  console.log("Server is running on port: " + process.env.PORT);
 });
